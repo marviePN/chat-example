@@ -5,7 +5,7 @@ var io = require('socket.io')(http);
 var port = process.env.PORT || 3000;
 
 var clients = [];
-var incr = 1;
+var add = 1;
 
 function getUsersList(){
   var usersList = [];
@@ -20,7 +20,7 @@ function setUserTyping(index){
     for (var i = 0; i < clients.length; i++){
       usersList[i] = clients[i].n; 
     }
-  usersList[index] = "💬 " + clients[index].n;
+  usersList[index] = clients[index].n + "💬 is typing " ;
   return usersList;
 }
 
@@ -32,9 +32,9 @@ io.on('connection', function(socket){
   clients.push(socket);
 
   socket.on('start', function(){
-    socket.emit('nick', "guest"+incr);
-    clients[clients.indexOf(socket)].n = "guest"+incr;
-    incr++;
+    socket.emit('nick', "guest"+add);
+    clients[clients.indexOf(socket)].n = "guest"+add;
+    add++;
     io.emit('users list', getUsersList());
   });
 
