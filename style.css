@@ -14,7 +14,7 @@ form button { width: 19%; background: rgb(130, 224, 255); border: none; padding:
 }
 section {
   flex: 4;
-  background:			honeydew;
+  background:	honeydew;
 }
 footer {
   flex: 1;
