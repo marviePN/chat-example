@@ -1,11 +1,15 @@
 
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var port = process.env.PORT || 3008;
-
+var path = require('path');
 var clients = [];
 var add = 1;
+
+
+app.use(express.static(path.join(__dirname,"public")));
 
 function getUsersList(){
   var usersList = [];
@@ -24,7 +28,7 @@ function setUserTyping(index){
   return usersList;
 }
 
-app.get('/', function(req, res){
+app.get('/', function(res){
   res.sendFile(__dirname + '/index.html');
 });
 
@@ -32,7 +36,7 @@ io.on('connection', function(socket){
   clients.push(socket);
 
   socket.on('start', function(){
-    socket.emit('nick', "guest"+add);
+    socket.emit('nickName', "guest"+add);
     clients[clients.indexOf(socket)].n = "guest"+add;
     add++;
     io.emit('users list', getUsersList());
@@ -42,9 +46,9 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
 
-  socket.on('set nick', function(nick){
-    io.emit('info', "New user: " + nick); 
-    clients[clients.indexOf(socket)].n = nick; 
+  socket.on('set nickName', function(nickName){
+    io.emit('info', "New user: " + nickName); 
+    clients[clients.indexOf(socket)].n = nickName; 
     io.emit('users list', getUsersList()); 
   });
 
