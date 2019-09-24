@@ -24,9 +24,9 @@
   *:before,
   *:after {
     box-sizing: inherit;
-  } 
+  }
 
-  main{
+  main {
     margin-left: 100px;
     margin-right: 100px;
     margin-top: 80px;
@@ -34,8 +34,9 @@
     padding-right: 20px;
     padding-top: 20px;
     padding-bottom: 20px;
-}
-/* 
+  }
+
+  /* 
   body {
     font: 13px Helvetica, Arial;
     margin: 0;
@@ -84,17 +85,24 @@
     width: calc(100% - 200px);
   }
 
+  #column {
+    /* flex-flow: row wrap; */
+    border: 1px solid peachpuff;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
   section {
     flex: 4;
     background: honeydew;
   }
 
-  footer {
+  #footer {
     flex: 1;
     background: mistyrose;
   }
 
-  aside {
+  #aside {
     background: turquoise;
     flex: 1;
   }
@@ -161,44 +169,45 @@
       <fieldset>
         <legend>
           <label>
-            <h2>Messages</h2>
+            <h2>Conversations</h2>
           </label>
         </legend>
         <ul id="messages"></ul>
       </fieldset>
     </section>
 
-    
-    <section>
-        <footer>
-            <fieldset>
-                <legend>
-                  <label>
-                      <h2>Input</h2>
+
+    <section id="column" >
+      <div id="footer"> 
+        <fieldset>
+          <legend>
+                <label>
+                    <h2>Enter your text here : </h2>
                   </label>
                 </legend>
-                  <form action="">
-                      <input id="boxMessage" autocomplete="off" disabled="true" /><button id="buttonMessage"
-                        disabled="true">Send</button>
-                    </form>
-              </fieldset>
-        </footer>
-    </section>    
+                <form id="footer" action="">
+                  <input id="boxMessage" autocomplete="off" disabled="true" /><button id="buttonMessage"
+                    disabled="true">Send</button>
+                </form>
+        </fieldset>
+      </div>
+      <div id = "aside">
+          <fieldset>
+              <legend>
+                <label>
+                  <h2>Online People</h2>
+                </label>
+              </legend>
+              <input id="boxNick" type="text" placeholder="your nickname?" size="13" />
+              <button type="submit" id="buttonNick" onClick="setMyName()">Set</button>
+              <ul id="ulist"></ul>
+            </fieldset>
+      </div>
       
-          
-          
-    
 
 
 
-
-
-
-
-
-
-
-
+    </section>
   </main>
 
   <!-- <
@@ -210,13 +219,13 @@
       </form>
     </footer> -->
 
-    <aside>
+  <!-- <aside>
       <h2>Online People</h2>
       <input id="boxNick" type="text" placeholder="your nickname?" size="13" />
       <button type="submit" id="buttonNick" onClick="setMyName()">Set</button>
       <ul id="ulist"></ul>
-    </aside>
-  
+    </aside> -->
+
 
 
   <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
